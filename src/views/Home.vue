@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center p-8">
-    <div class="flex gap-8 justify-center mt-2">
+    <div class="flex flex-wrap gap-2 lg:gap-8 justify-center mt-2">
       <router-link
         :to="{ name: 'byLetter', params: { letter } }"
         v-for="letter in letters.split('')"

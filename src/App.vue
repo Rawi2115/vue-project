@@ -6,11 +6,9 @@
   >
     <router-link :to="{ name: 'Home' }">Home</router-link>
     <div class="flex gap-4">
-      <router-link :to="{ name: 'byName' }">Search Meals</router-link>
-      <router-link :to="{ name: 'byLetter' }">Meals by letters</router-link>
-      <router-link :to="{ name: 'byIngredient' }"
-        >Meals by Ingredients</router-link
-      >
+      <router-link :to="{ name: 'byName' }">Search</router-link>
+      <router-link :to="{ name: 'byIngredient' }">By Ingredients</router-link>
+      <router-link :to="{ name: 'saved' }">Saved</router-link>
     </div>
   </header>
   <main class="bg-gray-300 min-h-screen">

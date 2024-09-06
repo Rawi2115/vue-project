@@ -1,10 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
-import MealList from "../views/MealList.vue";
-import SearchIngredients from "../views/SearchIngredients.vue";
-import SearchMeals from "../views/SearchMeals.vue";
-import SearchLetters from "../views/SearchLetters.vue";
-import MealPage from "../views/MealPage.vue";
+
+const Home = () => import("../views/Home.vue");
+const MealList = () => import("../views/MealList.vue");
+const SearchIngredients = () => import("../views/SearchIngredients.vue");
+const SearchMeals = () => import("../views/SearchMeals.vue");
+const SearchLetters = () => import("../views/SearchLetters.vue");
+const MealPage = () => import("../views/MealPage.vue");
+const SavedMeals = () => import("../views/SavedMeals.vue");
+
 const routes = [
   {
     path: "/",
@@ -12,12 +15,12 @@ const routes = [
     component: Home,
   },
   {
-    path: "/Ingredientsearch/:ingredient?",
+    path: "/Ingredientsearch",
     name: "byIngredient",
     component: SearchIngredients,
   },
   {
-    path: "/Namesearch/:name?",
+    path: "/Namesearch",
     name: "byName",
     component: SearchMeals,
   },
@@ -31,9 +34,16 @@ const routes = [
     name: "meal",
     component: MealPage,
   },
+  {
+    path: "/saved",
+    name: "saved",
+    component: SavedMeals,
+  },
 ];
+
 const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
 export default router;
