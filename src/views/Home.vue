@@ -12,13 +12,6 @@
   </div>
 </template>
 <script setup>
-import { computed, onMounted } from "vue";
-import store from "../store";
-import axiosClient from "../axiosClient";
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-onMounted(async () => {
-  const response = await axiosClient.get("/list.php?i=list");
-  console.log(response.data);
-});
 </script>
 <style scoped></style>
