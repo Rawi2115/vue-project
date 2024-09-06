@@ -37,14 +37,14 @@
 
 <script setup>
 import Button from "@/components/ui/button/Button.vue";
-import store from "@/store";
+import useMealStore from "@/store";
 import { Trash } from "lucide-vue-next";
-import { computed, onMounted } from "vue";
-
-const savedMeals = computed(() => store.getters.savedMeals);
+import { computed } from "vue";
+const mealStore = useMealStore();
+const savedMeals = computed(() => mealStore.getSavedMeals);
 
 function removeMeal(id) {
-  store.dispatch("removeSavedMeal", id);
+  mealStore.removeMeal(id);
 }
 </script>
 

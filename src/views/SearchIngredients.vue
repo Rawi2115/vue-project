@@ -36,16 +36,17 @@
 </template>
 <script setup>
 import Input from "@/components/ui/input/Input.vue";
-import store from "@/store";
+import useMealStore from "@/store";
 import { debounce } from "lodash";
 import { computed, onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
 const router = useRouter();
 const ingredient = ref(route.query.ingredient || "");
-const meals = computed(() => store.getters.searchedMealsByIngredients);
+const mealStore = useMealStore();
+const meals = computed(() => mealStore.getMealsByIngredients);
 function searchIngredient() {
-  store.dispatch("searchByIngredients", ingredient.value);
+  mealStore.searchByIngredients(ingredient.value);
   router.push({ query: { ingredient: ingredient.value } });
 }
 

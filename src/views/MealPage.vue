@@ -70,10 +70,11 @@ import { Button } from "@/components/ui/button";
 import axiosClient from "../axiosClient";
 import { Pin } from "lucide-vue-next";
 import Skeleton from "@/components/ui/skeleton/Skeleton.vue";
-import store from "@/store";
+import useMealStore from "@/store";
 const route = useRoute();
 const meal = ref(null);
 const loading = ref(true);
+const mealStore = useMealStore();
 onMounted(async () => {
   try {
     const response = await axiosClient.get(`/lookup.php?i=${route.params.id}`);
@@ -115,8 +116,7 @@ function formatInstructions(instructions) {
   return instructions.replace(/\r\n/g, "<br>");
 }
 function saveMeal() {
-  console.log(meal.value);
-  store.dispatch("saveMeal", {
+  mealStore.saveMeal({
     id: meal.value.idMeal,
     name: meal.value.strMeal,
     image: meal.value.strMealThumb,

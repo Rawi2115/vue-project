@@ -3,14 +3,15 @@
 </template>
 <script setup>
 import { computed, onMounted } from "vue";
-import store from "@/store";
 import { useRoute } from "vue-router";
 import DetaildMealCards from "@/components/DetaildMealCards.vue";
+import useMealStore from "@/store";
 const route = useRoute();
-const meals = computed(() => store.getters.mealsByLetters);
+const mealStore = useMealStore();
+const meals = computed(() => mealStore.getMealsByLetters);
 onMounted(() => {
   function getMeals() {
-    store.dispatch("searchLetter", route.params.letter);
+    mealStore.searchLetter(route.params.letter);
   }
   getMeals();
 });

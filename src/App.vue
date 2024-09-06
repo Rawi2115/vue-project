@@ -1,4 +1,11 @@
-<script setup></script>
+<script setup>
+import { onMounted } from "vue";
+import useMealStore from "./store";
+const mealStore = useMealStore();
+onMounted(() => {
+  mealStore.initializeSavedMeals();
+});
+</script>
 
 <template>
   <header

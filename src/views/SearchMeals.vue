@@ -8,7 +8,10 @@
       @input="debouncedSearchMeals"
     />
   </div>
-  <div v-if="!searchData" class="container mx-auto px-4 py-8">
+  <div
+    v-if="!searchData || searchData.length === 0"
+    class="container mx-auto px-4 py-8"
+  >
     <h1 class="text-3xl font-semibold mb-4">No searched meals yet</h1>
   </div>
   <DetaildMealCards v-else :data="searchData" />
@@ -17,24 +20,23 @@
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import { computed } from "@vue/reactivity";
-import { debounce } from "lodash"; // Import debounce from lodash
-import axiosClient from "../axiosClient";
-import store from "../store";
+import { debounce } from "lodash";
 import { useRoute, useRouter } from "vue-router";
 import Input from "@/components/ui/input/Input.vue";
 import DetaildMealCards from "@/components/DetaildMealCards.vue";
+import useMealStore from "../store";
 const route = useRoute();
 const router = useRouter();
 const keyWord = ref(route.query.name || "");
-const searchData = computed(() => store.state.searchedMeals);
+const mealStore = useMealStore();
+const searchData = computed(() => mealStore.getSearchedMeals);
 
 function searchMeals() {
-  store.dispatch("searchMeals", keyWord.value);
+  mealStore.searchMeals(keyWord.value);
   router.push({ query: { name: keyWord.value } });
 }
 
-// Create a debounced version of searchMeals
-const debouncedSearchMeals = debounce(searchMeals, 500); // Adjust the delay (500ms) as needed
+const debouncedSearchMeals = debounce(searchMeals, 500);
 watch(
   () => route.query.name,
   (newName) => {
